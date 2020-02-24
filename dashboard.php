@@ -5,8 +5,7 @@ $sidebar = "Dashboard";
 include('header.php');
 
  ?>
-<?php include('sidebar.php'); ?>
-<div class="content-wrapper">	
+<?php include('sidebar.php'); ?>	
 <?php 
 $header_content = "Agriculture Dasboard";
 $header = "Office Reports";
@@ -17,5 +16,4 @@ include('content_header.php');
 
 	   </div>
 	</section>
-</div>
 <?php include('footer.php'); ?>

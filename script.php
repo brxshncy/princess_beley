@@ -101,4 +101,30 @@ $(document).on('click','.e_remove',function(){
 	var e_id = $(this).attr('id');
 	$('#rm'+e_id+"").remove();
 })
+$(document).on('click','.dc_edit',function(){
+	let idd = $(this).attr('id');
+	console.log(idd);
+	$.ajax({
+		url:'ajax_calls/dc_props.php',
+		method:'post',
+		data:{idd:idd},
+		dataType:'JSON',
+		success:function(data){
+			console.log(data);
+			$('#e_id').val(data.id);
+			$('#efname').val(data.fname);
+			$('#elname').val(data.lname);
+			$('#ebday').val(data.bday);
+			$('#econtact').val(data.contact);
+			$('#eaddress').val(data.address);
+			$('#eusername').val(data.username);
+			$('#epassword').val(data.password);
+			$('#eassigned_area').val(data.area_id);
+			$('#district_edit_modal').modal('show');
+		},
+		error:function(data){
+			console.log(data);
+		}
+	})
+})
 })
