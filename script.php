@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$('#area_inspected_table').DataTable();
+	$('.select2').select2()
 /// AREA INSPECTION
 let i =1;
 
@@ -34,9 +35,11 @@ $(document).on('click','.view_area',function(){
 			$('#barangay_area').val(data.barangay_area)
 			$('#area_address').val(data.area_address);
 			let commodity = data.commodity.split(",");
+			let bla ="";
 			for(i = 0; i<commodity.length; i++){
-				$('#commodity_li').append("<li>"+commodity[i]+"</li>");
+				 bla += "<li>"+commodity[i]+"</li>";
 			}
+			$('#commodity_li').html(bla);
 			$('#soil_type').val(data.soil_type);
 			$('#area_platform').val(data.area_platform);
 			$('#date_inspected').val(data.date_inspected);
@@ -62,17 +65,18 @@ $(document).on('click','.edit_area',function(){
 			$('#abarangay_area').val(data.barangay_area);
 			$('#aarea_address').val(data.area_address);
 			let commodity = data.commodity.split(",");
+			let list = "";
 			for(i = 0; i<commodity.length; i++){
-				let list = "";
-					list +="<tr>";
-					list +="<td>";
-					list +="<input type='text' value='"+commodity[i]+"' name='e_comms[]' class='form-control mt-1	'>";
-					list +="</td>";
-					list +="<td>";
-					list +="</td>";
-					list +="</tr>";
-				$('#e_comm').append(list);
+				list +="<tr>";
+				list +="<td>";
+				list +="<input type='text' value='"+commodity[i]+"' name='e_comms[]' class='form-control mt-1'>";
+				list +="</td>";
+				list +="<td>";
+				list +="</td>";
+				list +="</tr>";
+					
 			}
+			$('#e_comm').html(list);
 			$('#asoil_type').val(data.soil_type);
 			$('#aarea_platform').val(data.area_platform);
 			$('#adate_inspected').val(data.date_inspected);
@@ -124,6 +128,23 @@ $(document).on('click','.dc_edit',function(){
 		},
 		error:function(data){
 			console.log(data);
+		}
+	})
+})
+$(document).on('click','.maintenance',function(){
+	let eqp_id = $(this).attr('id');
+	console.log(eqp_id);
+	$.ajax({
+		url:'ajax_calls/eqp_maintenance.php',
+		method:'post',
+		data:{id:eqp_id},
+		dataType:'json',
+		success:function(data){
+			$('#eqp_id').val(data.id);
+			$('#m_modal').modal('show');
+		},
+		error:function(err){
+			console.log(err);
 		}
 	})
 })

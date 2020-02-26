@@ -12,6 +12,14 @@
               <div class="row">
                 <div class="col col-md-6">
                   <div class="form-group">
+                    <label>Date Inspected</label>
+                    <input type="date" name="date_inspected" class="form-control">
+                  </div>
+                </div>
+              </div>
+               <div class="row">
+                  <div class="col col-md-3">
+                  <div class="form-group">
                     <label>Select Barangay Area:</label>
                     <select name="barangay_area" class="form-control">
                       <option value=""></option>
@@ -26,15 +34,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col col-md-6">
-                  <div class="form-group">
-                    <label>Date Inspected</label>
-                    <input type="date" name="date_inspected" class="form-control">
-                  </div>
-                </div>
-              </div>
-               <div class="row">
-                <div class="col">
+                <div class="col col-md-9">
                   <div class="form-group">
                     <label>Area Address</label>
                     <input type="text" class="form-control" name="area_address">

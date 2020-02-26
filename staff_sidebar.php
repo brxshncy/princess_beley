@@ -29,7 +29,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="area_inspected.php" class="nav-link <?php echo $sidebar == 'Equipment Inventory' ? 'active' : '' ?>">
+                <a href="equipment.php" class="nav-link <?php echo $sidebar == 'Equipment' ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Equipment Inventory</p>
                 </a>
