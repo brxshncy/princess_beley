@@ -17,6 +17,7 @@ include('header.php');
     <div class="col text-right col-md-2">
        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#equipment_add">
                <i class="fas fa-plus-circle mr-1"></i> Add Equipment Details
+        </button>
     </div>
 </div>
 <?php if(isset($_SESSION['add'])): ?>
@@ -89,7 +90,7 @@ include('header.php');
                   <th class="text-center">Equipment</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Commodity</th>
-                  <th class="text-center">Capacity</th>
+                  <th class="text-center">(Capacity & Unit Measure)</th>
                   <th class="text-center">Equipment Status</th>
                   <th class="text-center">Action</th>
                 </tr>
@@ -120,7 +121,9 @@ include('header.php');
                           <td class="text-center"><?php echo $a['capacity']." ".$a['unit'] ?> </td>
 
                           <td class="text-center">
+
                             <?php 
+                            date_default_timezone_set("Asia/Manila");
                                     if($a['date_sched'] == date("Y-m-d")){
                                       $id = $a['e_id'];
                                         $update = "UPDATE equipment SET status = 3 WHERE id ='$id'";
@@ -141,7 +144,7 @@ include('header.php');
                             ?> 
                           </td>
                           <td class="text-center">                  
-                              <a href="javascript:void(0)" id="<?php echo $a['e_id'] ?>" class="edit_equipment" Title = "Edit">
+                              <a href="javascript:void(0)" id="<?php echo $a['e_id'] ?>" class="edit_equipment mr-2" Title = "Edit">
                                <i class="fas fa-edit ml-2"></i>
                              </a>
                              <a href="javascript:void(0)" id="<?php echo $a['e_id'] ?>" class="maintenance" Title = "Set Maintenance">

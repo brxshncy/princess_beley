@@ -2,65 +2,14 @@
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Add Equipment</h4>
+              <h4 class="modal-title">Edit Equipment</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="controller/add_equipment_db.php" method="post">
-            <div class="modal-body">
-              <div class="row">
-                <div class="col col-md-6">
-                  <div class="form-group">
-                    <label>Equipment Name</label>
-                    <input type="text" class="form-control" name="equipment_name" id="equipment_name">
-                  </div>
-                </div>
-                <div class="col col-md-6">
-                  <div class="form-group">
-                   
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="form-group">
-                    <label>Description/Functionality</label>
-                    <textarea name="description" id="description" name="description" class="form-control" rows="3"></textarea>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col col-sm-6">
-                <div class="form-group">
-                  <label>Commodities</label>
-                  <div class="select2-purple">
-                    <select class="select2" multiple="multiple" id="commodity" name="commodity[]" id="commodity" data-placeholder="Select Commodities" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                      
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col col-md-3">
-                <label>Capacity of Commodity</label>
-                <input type="number" class="form-control" name="capacity" id="capacity">
-              </div>
-              <div class="col col-md-3">
-                <label>Unit Measure</label>
-                <input type="text" class="form-control" name="unit" id="unit">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col col-md-3">
-                <div class="form-group">
-                  <label>Status</label>
-                  <select name="status" class="form-control" id="status">
-                    <option value="1">Operational</option>
-                    <option value="2">Non Operational</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+            <form action="controller/edit_equipment_db.php" method="post">
+            <div class="modal-body" id="edit_eqp">
+     
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

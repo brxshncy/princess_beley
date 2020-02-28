@@ -1,6 +1,11 @@
 $(document).ready(function(){
 	$('#area_inspected_table').DataTable();
-	$('.select2').select2()
+	$('.select2').select2();
+	$('#cmx').hide();
+	$('#show_cmx').click(function(){
+		$('#cmx').show();
+		$('#show_cmx').hide();
+	})
 /// AREA INSPECTION
 let i =1;
 
@@ -9,7 +14,7 @@ $(document).on('click','#add_commodity',function(){
 	let commodity_html = "";
 		commodity_html += "<tr id=row"+i+">";
 		commodity_html += "<td>";
-		commodity_html += "<input type='text' class='form-control' name='commodity[]' placeholder='Commodity'>";
+		commodity_html += "<input type='text' class='form-control' name='commodity[]' placeholder='Commodity' required>";
 		commodity_html += "</td>";
 		commodity_html +="<td class='text-center'><button type='button' id='"+i+"' class='btn btn-danger remove'>Remove</button>";
 		commodity_html +="</td>";
@@ -44,6 +49,21 @@ $(document).on('click','.view_area',function(){
 			$('#area_platform').val(data.area_platform);
 			$('#date_inspected').val(data.date_inspected);
 			$('#view_area_modal').modal('show');
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
+})
+$(document).on('click','.ia',function(){
+	let id = $(this).attr('id');
+	$.ajax({
+		url:'ajax_calls/view_area.php',
+		data:{i_id:id},
+		method:'post',
+		success:function(data){
+			$('#i_area').html(data);
+			$('#i_area_modal').modal('show');
 		},
 		error:function(err){
 			console.log(err);
@@ -154,29 +174,25 @@ $(document).on('click','.edit_equipment',function(){
 	$.ajax({
 		url:'ajax_calls/edit_equipment.php',
 		data:{id:eqp_id},
-		dataType:'JSON',
 		method:'post',
+		dataType:'html',
 		success:function(data){
 			console.log(data);
-			$('#equipment_name').val(data.equipment_name);
-			$('#description').val(data.description);
-			let commodity = data.commodity.split(",");
-			console.log(commodity);
-			let html = "";
-			for(let i = 0 ; i <  commodity.length; i++){
-				html +="<option value="+commodity[i]+">";
-				html +=commodity[i];
-				html +="</option>";
-			}
-			$('#commodity').html(html);
-			$('#capacity').val(data.capacity);
-			$('#unit').val(data.unit);
-			$('#status').val(data.equipment_name);
+			
+			$('#edit_eqp').html(data);
+			$('.select22').select2();
 			$('#equipment_edit').modal('show');
 		},
 		error:function(err){
 			console.log(err);
 		}
 	})
+})
+$(document).on('click','.x_e_c',function(){
+	$(this).closest("tr").remove();
+})
+$(document).on('click','.bene_edit',function(){
+	let id = $(this).attr('id');
+	console.log(id);
 })
 })

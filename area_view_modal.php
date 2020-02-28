@@ -13,7 +13,7 @@
                 <div class="col col-md-6">
                   <div class="form-group">
                     <label>Select Barangay Area:</label>
-                    <select name="barangay_area" id="barangay_area" class="form-control">
+                    <select name="barangay_area" id="barangay_area" class="form-control" readonly>
                       <option value=""></option>
                       <?php
                         require('controller/db.php');
@@ -29,7 +29,7 @@
                  <div class="col col-md-6">
                   <div class="form-group">
                     <label>Date Inspected</label>
-                    <input type="text" name="date_inspected" id="date_inspected" class="form-control">
+                    <input type="text" name="date_inspected" id="date_inspected" class="form-control" readonly>
                   </div>
                 </div>
               </div>
@@ -37,7 +37,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label>Area Address</label>
-                    <input type="text" class="form-control" name="area_address" id="area_address">
+                    <input type="text" class="form-control" name="area_address" id="area_address" readonly>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label>Soil Type</label>
-                    <select name="soil_type" id="soil_type" class="form-control">
+                    <select name="soil_type" id="soil_type" class="form-control" readonly>
                       <option value=""></option>
                       <option value="Clay Soil">Clay Soil</option>
                       <option value="Sandy Soil">Sandy Soil</option>
@@ -69,7 +69,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label>Area Platform</label>
-                     <select name="area_platform" id="area_platform" class="form-control">
+                     <select name="area_platform" id="area_platform" class="form-control" readonly> 
                       <option value=""></option>
                       <option value="Elevated">Elevated</option>
                       <option value="Flat">Flat</option>

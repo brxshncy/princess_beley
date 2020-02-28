@@ -50,6 +50,7 @@
              <option value="">Select User Type</option>
              <option value="Admin">Admin</option>
              <option value="Staff">Staff</option>
+             <option value="dc">District Coordinator</option>
             </select>
           </div>
         <?php if(isset($_SESSION['err'])):?>

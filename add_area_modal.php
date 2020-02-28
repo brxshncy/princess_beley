@@ -43,13 +43,30 @@
               </div>
               <hr>
               <div class="row">
-                <div class="col">
-                  <b>Commodity Details
-                  </b>
+                <div class="col col-md-6">
+                  <div class="form-group">
+                    <label>Commodities</label>
+                      <select class="select2" multiple="multiple" name="commodity[]" data-placeholder="Select Commodities" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                      <option value="0">any commodities</option>
+                      <?php
+                          require('controller/db.php');
+                          $commodities = "SELECT * FROM commodity";
+                          $qry = $conn->query($commodities) or trigger_error(mysqli_error($conn)." ".$commodities);
+                          while($a = mysqli_fetch_assoc($qry)){?>
+                          <option value="<?php echo $a['commodity_name'] ?>"><?php echo $a['commodity_name'] ?></option>
+                      <?php }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="col col-md-3 mt-2">
+                  <button type="button" class="btn btn-primary mt-4" id="show_cmx">Add Commodity</button>
+                </div>
+                 <div class="col col-md-3">
                 </div>
               </div>
-               <div class="row mt-1">
-                <div class="col col-md-10">
+               <div class="row mt-1" id="cmx">
+                <div class="col col-md-12">
                   <table class="table  table-bordered" id="row_commodity">
                     <thead>
                         <tr>

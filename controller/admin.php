@@ -33,6 +33,30 @@ if(isset($_POST['submit'])){
 			header("location:../index.php");
 		}
 	}
+	else if($user_type == 'dc'){
+		$dc = "SELECT * FROM district_coordinator WHERE username = '$username' AND password = '$password'";
+		$qry_2 = $conn->query($dc) or trigger_error(mysqli_error($conn)." ".$dc);
+		
+
+		if(mysqli_num_rows($qry_2) >= 1 ){
+				$a= mysqli_fetch_assoc($qry_2);
+				if($a['status'] == 0){
+					session_start();
+					$_SESSION['id'] = $a['id'];
+					header("location:../dc_dashboard.php");
+				}
+				else if($a['status'] == 1){
+					session_start();
+					$_SESSION['err'] = "Sorry this account has been deactivated";
+					header("location:../index.php");
+				}
+		}
+		else{
+			session_start();
+					$_SESSION['err'] = "Invalid District Coordinator log in credentials";
+					header("location:../index.php");
+		}
+	}
 
 	
 	

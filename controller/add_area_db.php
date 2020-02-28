@@ -14,10 +14,12 @@ if(isset($_POST['submit'])){
 	$commodity = implode(",",$_POST['commodity']);
 	$soil_type = mysqli_escape_string($conn,$_POST['soil_type']);
 	$area_platform = mysqli_escape_string($conn,$_POST['area_platform']);
+	$date_inspected = $_POST['date_inspected';]
 
 
 	$ins = "INSERT INTO area_inspected
 	(
+		date_inspected,
 		barangay_area,
 		area_address,
 		commodity,
@@ -26,6 +28,7 @@ if(isset($_POST['submit'])){
 	)
 	VALUES
 	(
+		'$date_inspected',
 		'$barangay_area',
 		'$area_address',
 		'$commodity',

@@ -36,3 +36,18 @@ if(isset($_POST['e_id'])){
 
 	echo json_encode($data);
 }
+
+else if(isset($_POST['i_id'])){
+	$id = $_POST['i_id'];
+
+	$ins = "SELECT * FROM area_inspected a LEFT JOIN barangay b ON b.id = a.barangay_area WHERE b.id = '$id'";
+	$qry_1 = $conn->query($ins) or trigger_error(mysqli_error($conn)." ".$ins);
+	while($x = mysqli_fetch_assoc($qry_1)){?>
+<tr>
+	<td class="text-center"><?php echo ucwords($x['area_address']) ?></td>
+	<td class="text-center"><?php echo ucwords($x['commodity']) ?></td>
+	<td class="text-center"><?php echo ucwords($x['soil_type']) ?></td>
+	<td class="text-center"><?php echo ucwords($x['area_platform']) ?></td>
+</tr>
+<?php	}
+}

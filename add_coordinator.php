@@ -56,7 +56,7 @@ include('header.php');
                 <tbody>
                   <?php
                     require('controller/db.php');
-                    $dc = "SELECT *, a.area_address as area_address,d.id as d_id FROM district_coordinator d LEFT JOIN area_inspected a ON d.area_id = a.id ORDER BY d.id DESC";
+                    $dc = "SELECT *,b.id as b_id, d.id as d_id FROM district_coordinator d LEFT JOIN barangay b ON b.id = d.area_id ORDER BY d.id DESC";
                     $qry = $conn->query($dc) or trigger_error(mysqli_error($conn)." ".$dc);
                     while($row = mysqli_fetch_assoc($qry)){?>
                     <tr>
@@ -67,7 +67,11 @@ include('header.php');
                         $age = date("Y") - date("Y",strtotime($row['bday']));
                       ?>
                       <td class="text-center"><?php echo $age; ?></td>
-                      <td class="text-center"><?php echo ucwords($row['area_address']); ?></td>
+                      <td class="text-center">
+                          <a href="javascript:void(0)" id="<?php echo $row['b_id'] ?>" class="ia" title="View Area Inspected">
+                            <?php echo "<span class='badge badge-info'>".ucwords($row['baranggay_name'])."</span>"; ?>
+                          </a>
+                        </td>
                       <td class="text-center">
                         <?php
                             if($row['status'] == 0){
@@ -92,6 +96,7 @@ include('header.php');
 </div>
 </div>
 </section>
+<?php include('dc_inspect.php'); ?>
 <?php include('dc_add_modal.php'); ?>
 <?php include('dc_edit_modal.php'); ?>
 <?php include('footer.php'); ?>

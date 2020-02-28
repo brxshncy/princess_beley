@@ -68,12 +68,12 @@
                       <option value=""></option>
                       <?php
                           require('controller/db.php');
-                          $area = "SELECT *, b.baranggay_name as barangay, a.id as a_id FROM area_inspected a LEFT JOIN barangay b ON b.id = a.barangay_area";
+                          $area = "SELECT * from barangay";
                           $qry = $conn->query($area) or trigger_error(mysqli_error($conn)." ".$area);
                           while($a = mysqli_fetch_assoc($qry)){ 
                             $info = "<b>Barangay Area: </b>".$a['barangay']."; <b>Area Addres: </b>".ucwords($a['area_address'])."; <b>Commodities: </b>".$a['commodity'];
                       ?>
-                      <option value="<?php echo $a['a_id'] ?>"><?php echo $info; ?></option>
+                      <option value="<?php echo $a['id'] ?>"><?php echo $a['baranggay_name']; ?></option>
                       <?php  }
                       ?>
                     </select>
