@@ -61,6 +61,20 @@ include('header.php');
     </div>
   </div>
 <?php endif ?>
+<?php if(isset($_SESSION['err'])): ?>
+  <div class="row mb-2 justify-content-center">
+    <div class="col">
+      <div class="bg-danger disabled color-palette p-1">
+        <p class="text-center">
+          <?php
+              echo $_SESSION['err'];
+              unset($_SESSION['err']);
+          ?>
+        </p>
+      </div>
+    </div>
+  </div>
+<?php endif ?>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -83,7 +97,7 @@ include('header.php');
                 <tbody>
                   <?php
                       require('controller/db.php');
-                      $equipment = "SELECT * FROM equipment ORDER BY id DESC";
+                      $equipment = "SELECT *,e.id as e_id FROM equipment e LEFT JOIN equipment_maintenance em ON em.equipment_id = e.id ORDER BY e.id DESC";
                       $qry = $conn->query($equipment) or trigger_error(mysqli_error($conn)." ".$equipment);
                       $code = "EQPMT";
                       while($a = mysqli_fetch_assoc($qry)){?>
@@ -104,8 +118,14 @@ include('header.php');
                             ?>
                           </td>
                           <td class="text-center"><?php echo $a['capacity']." ".$a['unit'] ?> </td>
+
                           <td class="text-center">
                             <?php 
+                                    if($a['date_sched'] == date("Y-m-d")){
+                                      $id = $a['e_id'];
+                                        $update = "UPDATE equipment SET status = 3 WHERE id ='$id'";
+                                        $qry_1 = $conn->query($update) or trigger_error(mysqli_error($conn)." ".$update);
+                                    }
                                     if($a['status'] == 2){
                                         echo "<span class='badge badge-warning p-2'>Non Operational</span>"; 
                                     } 
@@ -120,14 +140,11 @@ include('header.php');
                                     }
                             ?> 
                           </td>
-                          <td class="text-center">
-                              <a href="javascript:void(0)" id="<?php echo $a['id'] ?>" class="view_equipment" Title = "View">
-                                <i class="far fa-keyboard text-success"></i>
-                              </a>
-                              <a href="javascript:void(0)" id="<?php echo $a['id'] ?>" class="edit_equipment" Title = "Edit">
+                          <td class="text-center">                  
+                              <a href="javascript:void(0)" id="<?php echo $a['e_id'] ?>" class="edit_equipment" Title = "Edit">
                                <i class="fas fa-edit ml-2"></i>
                              </a>
-                             <a href="javascript:void(0)" id="<?php echo $a['id'] ?>" class="maintenance" Title = "Set Maintenance">
+                             <a href="javascript:void(0)" id="<?php echo $a['e_id'] ?>" class="maintenance" Title = "Set Maintenance">
                               <i class="fas fa-exclamation-triangle text-warning"></i>
                              </a>
                           </td>
@@ -142,6 +159,7 @@ include('header.php');
 </div>
 </section>
 <?php include('equipment_add_modal.php');?>
+<?php include('equipment_edit_modal.php');?>
 <?php include('equipment_maintenance_modal.php');?>
 <?php include('area_view_modal.php');?>
 <?php include('area_edit_modal.php');?>

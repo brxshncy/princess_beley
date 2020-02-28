@@ -148,4 +148,35 @@ $(document).on('click','.maintenance',function(){
 		}
 	})
 })
+$(document).on('click','.edit_equipment',function(){
+	let eqp_id = $(this).attr('id');
+	console.log(eqp_id);
+	$.ajax({
+		url:'ajax_calls/edit_equipment.php',
+		data:{id:eqp_id},
+		dataType:'JSON',
+		method:'post',
+		success:function(data){
+			console.log(data);
+			$('#equipment_name').val(data.equipment_name);
+			$('#description').val(data.description);
+			let commodity = data.commodity.split(",");
+			console.log(commodity);
+			let html = "";
+			for(let i = 0 ; i <  commodity.length; i++){
+				html +="<option value="+commodity[i]+">";
+				html +=commodity[i];
+				html +="</option>";
+			}
+			$('#commodity').html(html);
+			$('#capacity').val(data.capacity);
+			$('#unit').val(data.unit);
+			$('#status').val(data.equipment_name);
+			$('#equipment_edit').modal('show');
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
+})
 })
