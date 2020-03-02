@@ -47,6 +47,10 @@ if(isset($_POST['id'])){
             			</thead>
             			<tbody>
             				<?php
+                      if($a['commodity'] == 0){
+                        echo "<tr><td colspan='2' class='text-center'><b>any commodity</b></td></tr>";
+                      }
+                      else{
             					$commodities = explode(",",$a['commodity']);
             					foreach($commodities as $commodity){
             						$comm = "SELECT * FROM commodity WHERE id ='$commodity'";
@@ -57,7 +61,7 @@ if(isset($_POST['id'])){
             						<td class="text-center"><?php echo $c['commodity_name'] ?></td>
             						<td class="text-center"><button type="button" class="btn btn-danger btn-sm x_e_c">Remove</button></td>
             					</tr>
-            				<?php 	}
+            				<?php 	} }
             				?>
             			</tbody>
             		</table>

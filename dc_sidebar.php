@@ -29,6 +29,31 @@
                   <p>Manage Beneficiaries</p>
                 </a>
               </li>
+            </ul>
+          </li>
+        </ul>
+         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link <?php echo $main_s == 'Equipments' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-american-sign-language-interpreting"></i>
+              <p>
+                Transactions
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="equipment_trans.php" class="nav-link <?php echo $sidebar == 'Equipments' ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-tools"></i>
+                  <p>Equipments</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item has-treeview menu-open">
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="logout.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

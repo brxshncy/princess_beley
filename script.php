@@ -194,5 +194,53 @@ $(document).on('click','.x_e_c',function(){
 $(document).on('click','.bene_edit',function(){
 	let id = $(this).attr('id');
 	console.log(id);
+	$.ajax({
+		url:'ajax_calls/bene_edit.php',
+		method:'post',
+		dataType:'html',
+		data:{id:id},
+		success:function(data){
+			console.log(data);
+			$('#b_edit').html(data);
+			$('#be_modal').modal('show');
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
 })
+$(document).on('click','.l',function(){
+	let id = $(this).attr('id');
+	$.ajax({
+		url:'ajax_calls/ce.php',
+		method:'post',
+		data:{id:id},
+		dataType:'html',
+		success:function(data){
+			$('#o').html(data);
+			$('#cemodal').modal('show');
+		},
+		error:function(data){
+			console.log(data);
+		}
+	})
+})
+$(document).on('click','.req',function(){
+	let id = $(this).attr('id');
+	$.ajax({
+		url:'ajax_calls/req.php',
+		method:'post',
+		data:{id:id},
+		dataType:'html',
+		success:function(data){
+			$('#rq').html(data);
+			$('#rqm').modal('show');
+
+		},
+		error:function(data){
+			console.log(data);
+		}
+	})
+})
+
 })

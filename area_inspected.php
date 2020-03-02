@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $title = "Inspected Area Info";
-$main_sidebar = "Dashboard";
+$main_sidebar = "Inspect Area";
 $sidebar = "Inspect Area";
 $header_content = "Inspected Area Info";
 $header = "City of Agriculture Inspected Area Informations";

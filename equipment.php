@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $title = "Equipment";
-$main_sidebar = "Dashboard";
+$main_sidebar = "Equipment";
 $sidebar = "Equipment";
 $header_content = "Manage Equipment";
 $header = "City of Agriculture Equipment Inventory";
@@ -86,12 +86,11 @@ include('header.php');
          <table id="area_inspected_table" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th class="text-center">Code Name</th>
                   <th class="text-center">Equipment</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Commodity</th>
                   <th class="text-center">(Capacity & Unit Measure)</th>
-                  <th class="text-center">Equipment Status</th>
+                  <th class="text-center">Status</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -103,11 +102,15 @@ include('header.php');
                       $code = "EQPMT";
                       while($a = mysqli_fetch_assoc($qry)){?>
                         <tr>
-                          <td class="text-center"><?php echo $code.$a['id'] ?></td>
                           <td class="text-center"><?php echo ucwords($a['equipment_name']) ?> </td>
                           <td class="text-center"><?php echo ucfirst($a['description']) ?> </td>
                           <td class="text-center">
+
                             <?php
+                              if($a['commodity'] == 0){
+                                echo "any commodity";
+                              }
+                              else{
                                 $commodity = explode(",",$a['commodity']);
                                 foreach($commodity as $commodity){
                                   $comm = "SELECT * FROM commodity WHERE id = '$commodity'";
@@ -116,6 +119,8 @@ include('header.php');
                                     echo $b['commodity_name'] == ''? 'Any commodities' : ucwords($b['commodity_name']).", ";
                                   }
                                 }
+                              }
+                                
                             ?>
                           </td>
                           <td class="text-center"><?php echo $a['capacity']." ".$a['unit'] ?> </td>
@@ -126,7 +131,7 @@ include('header.php');
                             date_default_timezone_set("Asia/Manila");
                                     if($a['date_sched'] == date("Y-m-d")){
                                       $id = $a['e_id'];
-                                        $update = "UPDATE equipment SET status = 3 WHERE id ='$id'";
+                                        $update = "UPDATE equipment SET status = 3, availability = 1 WHERE id ='$id'";
                                         $qry_1 = $conn->query($update) or trigger_error(mysqli_error($conn)." ".$update);
                                     }
                                     if($a['status'] == 2){

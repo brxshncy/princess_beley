@@ -82,6 +82,7 @@ include('content_header.php');
 </div>
 </section>
 <?php include('beneficiaries_add.php');?>
+<?php include('beneficiaries_edit.php'); ?>
 <?php include('footer.php'); ?>
 
 
