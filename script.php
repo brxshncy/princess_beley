@@ -243,4 +243,54 @@ $(document).on('click','.req',function(){
 	})
 })
 
+function unseen_notif(view = ''){
+	$.ajax({
+		url:'ajax_calls/notif.php',
+		method:'post',
+		data:{view:view},
+		dataType:'JSON',
+		success:function(data){
+			if(data.notification > 0){
+				$('#notif').html(data.notification).addClass('badge-danger');
+			}
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
+}
+setInterval(function(){
+	unseen_notif();
+}, 3000);
+
+$(document).on('click','#read',function(){
+	let read = "read";
+	$.ajax({
+		url:'ajax_calls/notif.php',
+		method:'post',
+		data:{read:read},
+		success:function(data){
+			console.log(data);
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
+})
+$(document).on('click','.view_req',function(){
+	let id = $(this).attr('id');
+	$.ajax({
+		url:'ajax_calls/view_req.php',
+		method:'post',
+		data:{id:id},
+		dataType:"html",
+		success:function(data){
+			$('#yz').html(data);
+			$('#xz').modal('show');
+		},
+		error:function(data){
+			console.log(data);
+		}
+})
+})
 })

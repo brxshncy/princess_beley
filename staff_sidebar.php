@@ -66,7 +66,15 @@
                   <p>Equipment Inventory</p>
                 </a>
               </li>
-
+               <li class="nav-item">
+                <a href="equipment_req.php" id="read" class="nav-link <?php echo $sidebar == 'Equipment Request' ? 'active' : '' ?>">
+                  <i class="fas fa-envelope nav-icon"></i>
+                  <p class="">Equipment Request
+                    <span class="badge right err" id="notif">
+                    </span>
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

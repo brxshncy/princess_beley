@@ -16,7 +16,7 @@ include('content_header.php');
 
 	<section class="content">
 	  <div class="container-fluid">
-	  	<?php if(isset($_SESSION['add'])): ?>
+	  	<?php if(isset($_SESSION['addcslashes(str, charlist)'])): ?>
   <div class="row mb-2 justify-content-center">
     <div class="col">
       <div class="bg-success disabled color-palette p-1">
@@ -108,11 +108,11 @@ include('content_header.php');
                           </td>
                           <td class="text-center">
                               <?php
-                                if($row['availability'] == 0){?>
+                                if($row['availability'] == 0 || $row['status'] == 1){?>
                                    <a href="javascript:void(0)" id="<?php echo $row['id'] ?>" class="req" title="Send Request">
                                       <i class="fas fa-envelope text-success"></i>
                                   </a>
-                               <?php } else if($row['availability'] == 1) { ?>
+                               <?php } else if($row['availability'] == 1 || $row['status'] == 2 || $row['status'] == 3) { ?>
                                   <a href="javascript:void(0)" title="Book Request">
                                       <i class="fas fa-book text-book"></i>
                                   </a>

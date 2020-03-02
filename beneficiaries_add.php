@@ -17,6 +17,12 @@
                     <input type="hidden" name="dc_id" value="<?php echo $_SESSION['id'] ?>">
                   </div>
                 </div>
+                <div class="col col-md-6">
+                  <div class="form-group">
+                    <label>Contact</label>
+                    <input type="text" class="form-control" name="contact">
+                  </div>
+                </div>
               </div>
               <?php
               ?>
