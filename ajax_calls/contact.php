@@ -27,7 +27,7 @@ if(isset($_POST['id'])){
             <?php
                 date_default_timezone_set("Asia/Manila")
             ?>
-            <textarea name="message" data-html="true" class="form-control" rows="3" readonly>Your request to borrow the equipment <?php echo $c['equipment_name'] ?> is granted. The item is borrowed at <?php echo date("D F j, Y",strtotime($c['date_borrowed'])) ?> expected to be returned in <?php echo date("D F j, Y",strtotime($c['date_return'])); ?></textarea>
+            <textarea name="message" data-html="true" class="form-control" rows="3" readonly>Your request to borrow the equipment <?php echo $c['equipment_name'] ?> is granted. The item is borrowed at <?php echo date("D F j, Y",strtotime($c['date_borrowed'])) ?> expected to be returned on <?php echo date("D F j, Y",strtotime($c['date_return'])); ?></textarea>
         </div>
     </div>
 </div>

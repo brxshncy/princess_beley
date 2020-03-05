@@ -324,5 +324,22 @@ $(document).on('click','.sms',function(){
 		}
 	})
 })
+$(document).on('click','.harvest',function(){
+	let id = $(this).attr('id');
+	console.log(id);
+	$.ajax({
+		url:'ajax_calls/harvest.php',
+		method:'post',
+		data:{id:id},
+		dataType:'html',
+		success:function(data){
+			$('#harvest_b').html(data);
+			$('#harvest_m').modal('show');
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
+})
 
 })

@@ -75,7 +75,17 @@ include('header.php');
                    <tr>
                       <td class="text-center"><?php echo $a['barangay'] ?></td>
                       <td class="text-center"><?php echo ucwords($a['area_address']); ?></td>
-                      <td class="text-center"><?php echo $a['commodity'] ?></td>
+                      <td class="text-center">
+                        <?php 
+                            $com = explode(",",$a['commodity']);
+                            foreach($com as $com){
+                              $go =  "SELECT * FROM commodity where id = '$com'";
+                              $qry_1 = $conn->query($go);
+                              $b = mysqli_fetch_assoc($qry_1);
+                                echo $b['commodity_name']." ";
+                            } 
+                        ?>
+                        </td>
                       <td class="text-center"><?php echo $a['soil_type'] ?></td>
                       <td class="text-center"><?php echo $a['area_platform'] ?></td>
                       <td class="text-center">

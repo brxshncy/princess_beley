@@ -75,6 +75,15 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="equipment_status.php" id="read" class="nav-link <?php echo $sidebar == 'Equipment Status' ? 'active' : '' ?>">
+                  <i class="far fa-clipboard nav-icon"></i>
+                  <p class="">Equipment Status
+                    <span class="badge right err" id="notif">
+                    </span>
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

@@ -11,13 +11,15 @@ if(isset($_POST['submit'])){
 	}
 	$barangay_area = mysqli_escape_string($conn,$_POST['barangay_area']);
 	$area_address = mysqli_escape_string($conn,$_POST['area_address']);
-	$commodity = implode(",",$_POST['commodity']);
+	$commodity = mysqli_escape_string($conn,implode(",",$_POST['commodity']));
 	$soil_type = mysqli_escape_string($conn,$_POST['soil_type']);
 	$area_platform = mysqli_escape_string($conn,$_POST['area_platform']);
 	$date_inspected = $_POST['date_inspected'];
 
+	echo $commodity;
 
-	$ins = "INSERT INTO area_inspected
+
+	/*$ins = "INSERT INTO area_inspected
 	(
 		date_inspected,
 		barangay_area,
@@ -42,6 +44,6 @@ if(isset($_POST['submit'])){
 		session_start();
 		$_SESSION['add'] = "Area information and commodities added to records";
 		header("location:../area_inspected.php");
-	}
+	}*/
 
 }

@@ -53,7 +53,7 @@
                           $commodities = "SELECT * FROM commodity";
                           $qry = $conn->query($commodities) or trigger_error(mysqli_error($conn)." ".$commodities);
                           while($a = mysqli_fetch_assoc($qry)){?>
-                          <option value="<?php echo $a['commodity_name'] ?>"><?php echo $a['commodity_name'] ?></option>
+                          <option value="<?php echo $a['id'] ?>"><?php echo $a['commodity_name'] ?></option>
                       <?php }
                       ?>
                     </select>
