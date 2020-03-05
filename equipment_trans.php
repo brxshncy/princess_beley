@@ -16,7 +16,7 @@ include('content_header.php');
 
 	<section class="content">
 	  <div class="container-fluid">
-	  	<?php if(isset($_SESSION['addcslashes(str, charlist)'])): ?>
+	  	<?php if(isset($_SESSION['add'])): ?>
   <div class="row mb-2 justify-content-center">
     <div class="col">
       <div class="bg-success disabled color-palette p-1">
@@ -86,7 +86,7 @@ include('content_header.php');
                                         echo "<span class='badge badge-warning p-2'>Non Operational</span>"; 
                                     } 
                                     else if($row['status'] == 1){
-                                      $stats = "<a href='javascript:void(0)' id='".$a['id']."'>";
+                                      $stats = "<a href='javascript:void(0)' id='".$row['id']."'>";
                                           $stats .="<span class='badge badge-success p-2'>Operational</span>"; 
                                           $stats .= "</a>";
                                         echo $stats;

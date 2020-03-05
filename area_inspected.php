@@ -82,7 +82,7 @@ include('header.php');
                               $go =  "SELECT * FROM commodity where id = '$com'";
                               $qry_1 = $conn->query($go);
                               $b = mysqli_fetch_assoc($qry_1);
-                                echo $b['commodity_name']." ";
+                                echo $b['commodity_name'].",";
                             } 
                         ?>
                         </td>

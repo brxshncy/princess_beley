@@ -39,7 +39,7 @@ $(document).on('click','.view_area',function(){
 			console.log(data);
 			$('#barangay_area').val(data.barangay_area)
 			$('#area_address').val(data.area_address);
-			let commodity = data.commodity.split(",");
+			let commodity = data.comm;
 			let bla ="";
 			for(i = 0; i<commodity.length; i++){
 				 bla += "<li>"+commodity[i]+"</li>";
@@ -77,29 +77,12 @@ $(document).on('click','.edit_area',function(){
 	$.ajax({
 		url:'ajax_calls/view_area.php',
 		method:'post',
-		dataType:'JSON',
+		dataType:'html',
 		data:{e_id:e_area_id},
 		success:function(data){
 			console.log(data);
-			$('#area_id').val(data.id);
-			$('#abarangay_area').val(data.barangay_area);
-			$('#aarea_address').val(data.area_address);
-			let commodity = data.commodity.split(",");
-			let list = "";
-			for(i = 0; i<commodity.length; i++){
-				list +="<tr>";
-				list +="<td>";
-				list +="<input type='text' value='"+commodity[i]+"' name='e_comms[]' class='form-control mt-1'>";
-				list +="</td>";
-				list +="<td>";
-				list +="</td>";
-				list +="</tr>";
-					
-			}
-			$('#e_comm').html(list);
-			$('#asoil_type').val(data.soil_type);
-			$('#aarea_platform').val(data.area_platform);
-			$('#adate_inspected').val(data.date_inspected);
+			$('#e_m_b').html(data);
+			$('.select2').select2();
 			$('#edit_area_modal').modal('show');
 		},
 		error:function(err){

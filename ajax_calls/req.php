@@ -4,15 +4,14 @@ if(isset($_POST['id'])){
 	$id = $_POST['id'];
 
 	$eq = "SELECT * FROM equipment WHERE id ='$id'";
-	$qry = $conn->query($eq) or trigger_error(mysqli_error($conn)." ".$sq);
+	$qry = $conn->query($eq) or trigger_error(mysqli_error($conn)." ".$eq);
 	$a = mysqli_fetch_assoc($qry);?>
 <div class="row mt-3">
     <div class="col col-md-6">
         <div class="form-group">
             <label>Equipment Name</label>
             <input type="text" class="form-control"  value="<?php echo $a['equipment_name']; ?>" readonly>
-             <input type="hidden" class="form-control" name="eq"  value="<?php echo $a['id']; ?>" readonly>
-             
+            <input type="hidden" class="form-control" name="eq"  value="<?php echo $a['id']; ?>" readonly>
         </div>
     </div>
         <div class="col col-md-6">
@@ -21,10 +20,11 @@ if(isset($_POST['id'])){
             <select name="bf" class="form-control">
                 <option value=""></option>
                 <?php
-                    $bene = "SELECT * FROM benefeciaries";
+                    $bene = "SELECT *,b.id as b_id,ai.id as a_id FROM benefeciaries b left join area_inspected ai on ai.id = b.specific_area";
                     $q = $conn->query($bene) or trigger_error(mysqli_error($conn)." ".$bene);
                     while($x = mysqli_fetch_assoc($q)){ ?>
-                    <option value="<?php echo $x['id'] ?>"> <?php echo $x['benefeciaries'] ?></option>
+                    <option value="<?php echo $x['b_id'] ?>"> <?php echo $x['benefeciaries'] ?></option>
+                    <input type="hidden" value="<?php echo $x['a_id'] ?>" name="area_id">
                  <?php }
                 ?>
             </select>

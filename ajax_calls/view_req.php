@@ -58,9 +58,12 @@ if(isset($_POST['id'])){
 			<ul>
 			<?php
 				$comms = explode(",",$b['commodity']);
-				foreach($comms as $comm){ ?>
-					<li><?php echo $comm ?></li>
-			<?php } ?>	
+				foreach($comms as $comm){ 
+					$o = "SELECT commodity_name from commodity where id =  '$comm'";
+					$qry_2 = $conn->query($o) or trigger_error(mysqli_error($conn)." ".$o);
+					$c = mysqli_fetch_assoc($qry_2);
+					echo "<li>".$c['commodity_name']."</li>";
+			 } ?>
 		</ul>
 	</div>
 </div>

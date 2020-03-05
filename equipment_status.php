@@ -94,7 +94,7 @@ include('header.php');
                 <tbody>
                   <?php
                       require('controller/db.php');
-                      $equipment = "SELECT re.date_return as return_date,t.id as t_id,t.date_return as date_return, t.area_id as area_id,t.date_borrowed as date_borrowed,b.specific_area as specific_area,t.reason as reason, e.equipment_name as equipment, b.benefeciaries as benefeciaries from transaction t LEFT JOIN  equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id left join return_equipment re ON re.transaction_id = t.id WHERE t.state = 1";
+                      $equipment = "SELECT re.date_return as return_date,t.id as t_id,t.date_return as date_return,t.date_borrowed as date_borrowed,b.specific_area as specific_area,t.reason as reason, e.equipment_name as equipment, b.benefeciaries as benefeciaries from transaction t LEFT JOIN  equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id left join return_equipment re ON re.transaction_id = t.id WHERE t.state = 1";
                       $qry = $conn->query($equipment) or trigger_error(mysqli_error($conn)." ".$equipment);
                       while($a = mysqli_fetch_assoc($qry)){?>
                         <tr>

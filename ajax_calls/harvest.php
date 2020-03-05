@@ -4,8 +4,8 @@ require('../controller/db.php');
 if(isset($_POST['id'])){
 	$id = $_POST['id'];
 
-	$transac = "SELECT *,t.bfcry_id as b_id,t.area_id as a_id FROM transaction t left join equipment e on e.id  = t.eqp_id where t.id = '$id'";
-	$qry = $conn->query($transac) or trigger(mysqli_error($conn)." ".$transac);
+	$transac = "SELECT *,t.bfcry_id as b_id FROM transaction t left join equipment e on e.id  = t.eqp_id where t.id = '$id'";
+	$qry = $conn->query($transac) or trigger_error(mysqli_error($conn)." ".$transac);
 	$a = mysqli_fetch_assoc($qry);?>
 <div class="row">
 	<div class="col">
@@ -17,20 +17,27 @@ if(isset($_POST['id'])){
 </div>
 <hr>
 <?php
-	$a_id = $a['a_id'];
-	$comms = "SELECT * FROM commodity c LEFT JOIN";
-	$qry_1 = $conn->query($comms) or trigger_error(mysqli_error($conn)." ".$comms);
-	while($b = mysqli_fetch_assoc($qry_1)){?>
+ 	$a_id = $a['b_id'];
+	$comms = "SELECT ai.commodity as comm from benefeciaries b left join area_inspected ai on b.specific_area = ai.id where b.id = '$a_id' ";
+	$qr = $conn->query($comms) or trigger_error(mysqli_error($conn)." ".$comms);
+	$c = mysqli_fetch_assoc($qr);
+	$c_id = explode(",",$c['comm']);
+	foreach($c_id as $cc){
+		$har = "SELECT * from commodity where id = '$cc'";
+		$qr_1 = $conn->query($har);
+		$p = mysqli_fetch_assoc($qr_1);?>
 <div class="row mt-2">
 	<div class="col">
-		<input type="text" name="comm[]" value="<?php echo $b['commodity_name'] ?>" class="form-control">
+		<input type="text" value="<?php echo $p['commodity_name'] ?>" class="form-control">
+		<input type="hidden" value="<?php echo $p['id'] ?>" name="c_id">
 	</div>
 	<div class="col">
-		<input type="number" name="number[<?php echo $b['id'] ?>]" class="form-control">
+		<input type="text" name="volume" class="form-control">
 	</div>
 </div>
+<?php	}
+?>
 <?php }
 ?>
 
 
-<?php }  ?>
