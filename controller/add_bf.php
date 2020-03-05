@@ -13,6 +13,8 @@ if(isset($_POST['submit'])){
 		session_start();
 		$_SESSION['add'] = "Beneficiaries saved";
 		header("location:../beneficiaries.php");
+
+
 	}
 	else{
 		echo "error";

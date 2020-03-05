@@ -48,6 +48,27 @@
                   <p>Equipments</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="equipment_accept.php" id="dc_read" class="nav-link <?php echo $sidebar == 'Notification' ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-bell"></i>
+                  <p>Notification</p>
+                  <?php
+                    require('controller/db.php');
+                     $lol = $_SESSION['id'];
+                     $notif = "SELECT COUNT(state) as state FROM transaction WHERE state = 1 AND dc_id = '$lol' AND dc_notif = 0";
+                     $qry = $conn->query($notif) or trigger_error(mysqli_error($con)." ".$notif);
+                     $c = mysqli_fetch_assoc($qry);
+
+                     if($c['state'] > 0){
+                       echo "<span class='badge right badge-danger'>".$c['state']."</span>";
+                     }
+                     else{
+                      echo "";
+                     }
+                  ?>
+
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

@@ -4,7 +4,7 @@ require('../controller/db.php');
 if(isset($_POST['id'])){
 	$id = $_POST['id'];
 
-	$z = "SELECT *, e.equipment_name as equipment_name,t.area_id as area_id,b.benefeciaries as benefeciaries FROM transaction t LEFT JOIN equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id WHERE t.id ='$id'";
+	$z = "SELECT *, e.equipment_name as equipment_name,e.id as e_id,b.specific_area as area_id,b.benefeciaries as benefeciaries,t.id as t_id FROM transaction t LEFT JOIN equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id WHERE t.id ='$id'";
 	$qry = $conn->query($z) or trigger_error(mysqli_error($conn)." ".$z);
 	$a = mysqli_fetch_assoc($qry);?>
 <div class="row">
@@ -12,6 +12,8 @@ if(isset($_POST['id'])){
 		<div class="form-group">
 			<label>Equipment</label>
 			<input type="text" class="form-control" value="<?php echo $a['equipment_name'] ?>" readonly>
+			<input type="hidden" value="<?php echo $a['t_id'] ?>" name="t_id">
+			<input type="hidden" value="<?php echo $a['e_id'] ?>" name="e_id">
 		</div>
 	</div>
 	<div class="col">

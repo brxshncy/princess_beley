@@ -293,4 +293,36 @@ $(document).on('click','.view_req',function(){
 		}
 })
 })
+$(document).on('click','#dc_read',function(){
+	let read="read";
+	$.ajax({
+		url:'ajax_calls/dc_notif.php',
+		method:'post',
+		data:{i:read},
+		success:function(data){
+			console.log(data);
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
+})
+$(document).on('click','.sms',function(){
+	let id = $(this).attr('id');
+	console.log(id);
+	$.ajax({
+		url:'ajax_calls/contact.php',
+		method:'post',
+		data:{id:id},
+		dataType:"html",
+		success:function(data){
+			$('#cb').html(data);
+			$('#contact_modal').modal('show');
+		},
+		error:function(err){
+			console.log(err);
+		}
+	})
+})
+
 })

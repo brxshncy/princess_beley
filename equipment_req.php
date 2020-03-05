@@ -92,7 +92,7 @@ include('header.php');
                 <tbody>
                   <?php
                       require('controller/db.php');
-                      $equipment = "SELECT t.id as t_id, t.area_id as area_id, t.reason as reason, e.equipment_name as equipment, b.benefeciaries as benefeciaries from transaction t LEFT JOIN equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id";
+                      $equipment = "SELECT t.id as t_id, t.area_id as area_id,b.specific_area as specific_area,t.reason as reason, e.equipment_name as equipment, b.benefeciaries as benefeciaries from transaction t LEFT JOIN equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id WHERE t.state = 0";
                       $qry = $conn->query($equipment) or trigger_error(mysqli_error($conn)." ".$equipment);
                       while($a = mysqli_fetch_assoc($qry)){?>
                         <tr>
@@ -100,7 +100,7 @@ include('header.php');
                           <td class="text-center"><?php echo ucfirst($a['benefeciaries']) ?> </td>
                           <td class="text-center">
                             <?php
-                              $c = $a['area_id'];
+                              $c = $a['specific_area'];
                                 $address = "SELECT a.area_address as area_address, b.baranggay_name as brgy FROM area_inspected a LEFT JOIN barangay b ON b.id=a.barangay_area WHERE a.id = '$c'";
                                 $qry_1 = $conn->query($address) or trigger_error(mysqli_error($conn)." ".$address);
                                 $b  = mysqli_fetch_assoc($qry_1);

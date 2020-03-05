@@ -108,13 +108,13 @@ include('content_header.php');
                           </td>
                           <td class="text-center">
                               <?php
-                                if($row['availability'] == 0 || $row['status'] == 1){?>
+                                if($row['availability'] == 0 && $row['status'] == 1){ ?>
                                    <a href="javascript:void(0)" id="<?php echo $row['id'] ?>" class="req" title="Send Request">
                                       <i class="fas fa-envelope text-success"></i>
                                   </a>
                                <?php } else if($row['availability'] == 1 || $row['status'] == 2 || $row['status'] == 3) { ?>
                                   <a href="javascript:void(0)" title="Book Request">
-                                      <i class="fas fa-book text-book"></i>
+                                      <i class="fas fa-book text-info"></i>
                                   </a>
                                <?php } ?>
                                 
@@ -133,6 +133,7 @@ include('content_header.php');
 </div>
 </section>
 <?php include('trans_add.php'); ?>
+
 <?php include('footer.php'); ?>
 
 

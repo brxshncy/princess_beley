@@ -8,8 +8,9 @@
               </button>
             </div>
             <form action="controller/add_transac.php" method="post">
+             <input type="hidden" name="dc_id" value="<?php echo $_SESSION['id'] ?>">
             <div class="modal-body" id="rq">
-    
+                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

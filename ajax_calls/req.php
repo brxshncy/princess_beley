@@ -12,6 +12,7 @@ if(isset($_POST['id'])){
             <label>Equipment Name</label>
             <input type="text" class="form-control"  value="<?php echo $a['equipment_name']; ?>" readonly>
              <input type="hidden" class="form-control" name="eq"  value="<?php echo $a['id']; ?>" readonly>
+             
         </div>
     </div>
         <div class="col col-md-6">
@@ -22,10 +23,9 @@ if(isset($_POST['id'])){
                 <?php
                     $bene = "SELECT * FROM benefeciaries";
                     $q = $conn->query($bene) or trigger_error(mysqli_error($conn)." ".$bene);
-                    while($x = mysqli_fetch_assoc($q)){?>
-                <option value="<?php echo $x['id'] ?>"><?php echo $x['benefeciaries'] ?></option>
-                <input type="hidden" value="<?php echo $x['specific_area'] ?>" name="area_id">
-                <?php }
+                    while($x = mysqli_fetch_assoc($q)){ ?>
+                    <option value="<?php echo $x['id'] ?>"> <?php echo $x['benefeciaries'] ?></option>
+                 <?php }
                 ?>
             </select>
         </div>
