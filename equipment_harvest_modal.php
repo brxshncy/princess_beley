@@ -7,7 +7,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="controller/add_equipment_db.php" method="post">
+            <form action="controller/postharvest.php" method="post">
             <div class="modal-body"  id="harvest_b">
               
             </div>
