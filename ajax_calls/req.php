@@ -24,7 +24,6 @@ if(isset($_POST['id'])){
                     $q = $conn->query($bene) or trigger_error(mysqli_error($conn)." ".$bene);
                     while($x = mysqli_fetch_assoc($q)){ ?>
                     <option value="<?php echo $x['b_id'] ?>"> <?php echo $x['benefeciaries'] ?></option>
-                    <input type="hidden" value="<?php echo $x['a_id'] ?>" name="area_id">
                  <?php }
                 ?>
             </select>

@@ -1,10 +1,10 @@
-         <?php 
+<?php 
 session_start();
-$title = "Equipment Request";
+$title = "Harvest Reportst";
 $main_sidebar = "Equipment";
-$sidebar = "Equipment Request";
-$header_content = "Manage Equipment Request";
-$header = "Requests";
+$sidebar = "Harvest Reports";
+$header_content = "Monitor Equipment Reports";
+$header = "Equipment Harvest Reports";
 include('header.php');
  ?>
 <?php include('staff_sidebar.php'); ?>  
@@ -77,44 +77,35 @@ include('header.php');
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Pending Requests</h3>
+              <h3 class="card-title">Harvest Reports</h3>
             </div>
         <div class="card-body">
          <table id="area_inspected_table" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                  <th class="text-center">Date Borrowed</th>
+                  <th class="text-center">Date Returned</th>
                   <th class="text-center">Equipment</th>
-                  <th class="text-center">Beneficiary</th>
-                  <th class="text-center">Location</th>
-                  <th class="text-center">Action</th>
+                  <th class="text-center">Crops</th>
+                  <th class="text-center">Volume</th>
+                  <th class="text-center">Benefeciaries</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php
                       require('controller/db.php');
-                      $equipment = "SELECT t.id as t_id,b.specific_area as specific_area,t.reason as reason, e.equipment_name as equipment, b.benefeciaries as benefeciaries from transaction t LEFT JOIN equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id WHERE t.state = 0";
-                      $qry = $conn->query($equipment) or trigger_error(mysqli_error($conn)." ".$equipment);
+                      $harvest = "SELECT * FROM post_harvest pb left join transaction t on t.id = pb.transac_id left join equipment e on t.eqp_id = e.id left join commodity c on c.id = pb.crops_id left join benefeciaries b on b.id = t.bfcry_id order by t.date_borrowed ASC";
+                      $qry = $conn->query($harvest) or trigger_error(mysqli_error($conn)." ".$harvest);
                       while($a = mysqli_fetch_assoc($qry)){?>
                         <tr>
-                          <td class="text-center"><?php echo ucwords($a['equipment']) ?> </td>
-                          <td class="text-center"><?php echo ucfirst($a['benefeciaries']) ?> </td>
-                          <td class="text-center">
-                            <?php
-                              $c = $a['specific_area'];
-                                $address = "SELECT a.area_address as area_address, b.baranggay_name as brgy FROM area_inspected a LEFT JOIN barangay b ON b.id=a.barangay_area WHERE a.id = '$c'";
-                                $qry_1 = $conn->query($address) or trigger_error(mysqli_error($conn)." ".$address);
-                                $b  = mysqli_fetch_assoc($qry_1);
-
-                                echo $b['brgy']." ".ucwords($b['area_address']);
-                            ?>
-                          </td>
-                          <td class="text-center">                  
-                              <a href="javascript:void(0)" id="<?php echo $a['t_id'] ?>" class="view_req mr-2" Title = "Accept">
-                               <i class="fas fa-eye text-success mr-2"></i>
-                             </a>
-                          </td>
+                          <td class="text-center"><?php echo $a['date_borrowed']; ?></td>
+                          <td class="text-center"><?php echo $a['date_return']; ?></td>
+                          <td class="text-center"><?php echo $a['equipment_name']; ?></td>
+                          <td class="text-center"><?php echo $a['commodity_name']; ?></td>
+                          <td class="text-center"><?php echo $a['volume']; ?></td>
+                          <td class="text-center"><?php echo $a['benefeciaries']; ?></td>
                         </tr>
-                  <?php } ?>
+                    <?php }  ?>
                 </tbody>
          </table>
         </div>
@@ -124,4 +115,5 @@ include('header.php');
 </div>
 </section>
 <?php include('equip_req_a.php'); ?>
+<?php include('equipment_harvest_modal.php');?>
 <?php include('footer.php'); ?>

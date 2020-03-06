@@ -84,6 +84,24 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="equipment_harvest.php" id="read" class="nav-link <?php echo $sidebar == 'Harvest Reports' ? 'active' : '' ?>">
+                  <i class="far fa-clipboard nav-icon"></i>
+                  <p class="">Harvest Reports
+                    <span class="badge right err" id="notif">
+                    </span>
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="equipment_reports.php" id="read" class="nav-link <?php echo $sidebar == 'Equipment Reports' ? 'active' : '' ?>">
+                  <i class="far fa-clipboard nav-icon"></i>
+                  <p class="">Equipment Reports
+                    <span class="badge right err" id="notif">
+                    </span>
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

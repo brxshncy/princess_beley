@@ -33,12 +33,9 @@ if(isset($_POST['id'])){
 	</div>
 </div>
 <div class="row mt-2">
-	<div class="col">
+	<div class="col col-md-8">
 		<input type="hidden" value="<?php echo $p['id'] ?>" name="c_id[]">
 		<input type="text" name="volume[<?php echo $p['id'] ?>]" class="form-control" placeholder="Number of Volume">
-	</div>
-	<div class="col">
-		<input type="text" name="unit_measure[<?php echo $p['id'] ?>]" class="form-control" placeholder="Unit Measure">
 	</div>
 </div>
 

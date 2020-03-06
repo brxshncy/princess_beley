@@ -52,7 +52,7 @@ include('content_header.php');
                     <?php 
                       require('controller/db.php');
                       $id = $_SESSION['id'];  
-                      $bene = "SELECT *,b.id as b_id FROM transaction t LEFT JOIN equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id WHERE t.dc_id = '$id' ORDER BY t.id DESC";
+                      $bene = "SELECT *,b.id as b_id FROM transaction t LEFT JOIN equipment e ON t.eqp_id = e.id LEFT JOIN benefeciaries b ON b.id = t.bfcry_id WHERE t.dc_id = '$id' AND t.state = 1 ORDER BY t.id DESC";
                       $qry = $conn->query($bene) or trigger_error(mysqli_error($conn)." ".$bene);
                       $counter = 0;
                       while($row = mysqli_fetch_assoc($qry)){ $counter++;?>

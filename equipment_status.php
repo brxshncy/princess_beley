@@ -1,4 +1,4 @@
-         <?php 
+<?php 
 session_start();
 $title = "Equipment Request";
 $main_sidebar = "Equipment";
@@ -128,10 +128,22 @@ include('header.php');
                                 <i class="fas fa-people-carry text-success"></i>
                              </a>
 
-                              <?php    } else{?>
-                            <a href="javascript:void(0)" class="text-center harvest" id="<?php echo $a['t_id'] ?>" title="Post Harvest Accumlation">
-                                <i class="fas fa-desktop text-info"></i>
-                            </a>
+                              <?php } 
+                              else
+                               { 
+                                  $t_id = $a['t_id'];
+                                  $harvest = "SELECT * FROM post_harvest WHERE transac_id = '$t_id'";
+                                  $qrqr = $conn->query($harvest) or trigger_error(mysqli_error($conn)." ".$harvest);
+                                  if(mysqli_num_rows($qrqr) > 0){
+                                    echo "Harvest Recorded";
+                                  }
+                                  else{?>
+                                     <a href="javascript:void(0)" class="text-center harvest" id="<?php echo $a['t_id'] ?>" title="Post Harvest Accumlation">
+                                        <i class="fas fa-desktop text-info"></i>
+                                    </a>
+                                <?php  }
+                               ?>
+                           
                              <?php }
                               ?>                 
       <div class="modal fade" id="m<?php echo $a['t_id']; ?>">
