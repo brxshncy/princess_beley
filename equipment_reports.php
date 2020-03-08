@@ -91,7 +91,7 @@ include('header.php');
           <tbody>
                 <?php
                   require('controller/db.php');
-                  $eq = "SELECT *,e.id as e_id,(SELECT COUNT(eqp_id) FROM transaction tt LEFT JOIN equipment ee ON ee.id = tt.eqp_id WHERE tt.bfcry_id =b.id ) as count, (SELECT sum(volume) FROM transaction ttt left join post_harvest ph on ph.transac_id = ttt.id WHERE ph.transac_id = t.id) as total_harvest FROM equipment e left join transaction t on t.eqp_id = e.id left join benefeciaries b on b.id = t.bfcry_id where t.state = 1   ORDER BY e.id DESC";
+             $eq= "SELECT distinct equipment_name,e.id as e_id,(select count(eqp_id) from transaction tt left join equipment ee on ee.id = tt.eqp_id where tt.eqp_id = e.id) as count,(SELECT sum(volume) from post_harvest ph left join transaction ttt on ttt.id = ph.transac_id left join equipment eee on eee.id = ttt.eqp_id where t.eqp_id = eee.id) as total_harvest from equipment e left join transaction t on t.eqp_id = e.id";
                   $qry = $conn->query($eq) or trigger_error(mysqli_error($conn)." ".$eq);
                   while($a = mysqli_fetch_assoc($qry)):?>
                   <tr>
@@ -99,11 +99,18 @@ include('header.php');
 
                     <td class="text-center">
                       <a href="javascript:void(0)"  data-toggle="modal" data-target="#m<?php echo $a['e_id'] ?>">
-                        <?php echo $a['count'] ?>
+                        <span class="badge badge-info"><?php echo $a['count'] ?></span>
                      </a>
                     </td>
                      <?php include('uses_modal.php'); ?>
-                    <td  width="40%" class="text-center"><?php echo $a['total_harvest'] ?></td>
+                    <td  width="40%" class="text-center">
+                      <a href="javascript:void(0)" data-toggle="modal" data-target="#c<?php echo $a['e_id'] ?>">
+                       <span class="badge badge-warning"><?php echo $a['total_harvest'] ?></span>
+                     </a>
+                    </td>
+                    <?php
+                      include('uses_accumulated.php');
+                    ?>
                   </tr>
                 <?php endwhile ?>
             </tbody>

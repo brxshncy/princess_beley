@@ -132,10 +132,19 @@ include('header.php');
                               else
                                { 
                                   $t_id = $a['t_id'];
-                                  $harvest = "SELECT * FROM post_harvest WHERE transac_id = '$t_id'";
+                                  $harvest = "SELECT *,ee.id as ee_id FROM post_harvest ph left join transaction tt on tt.id = ph.transac_id left join equipment ee on ee.id = tt.eqp_id  WHERE transac_id = '$t_id'";
                                   $qrqr = $conn->query($harvest) or trigger_error(mysqli_error($conn)." ".$harvest);
+                                  $oo = mysqli_fetch_assoc($qrqr);
+                                  $e_id = $oo['ee_id'];
                                   if(mysqli_num_rows($qrqr) > 0){
-                                    echo "Harvest Recorded";
+                                    $up = "UPDATE equipment SET availability = 0 WHERE id ='$e_id'";
+                                    $qryy = $conn->query($up) or trigger_error(mysqli_error($conn)." ".$up);
+                                    if($qryy){
+                                      echo "Harvest Recorded";
+                                    }
+                                    else{
+                                      echo "error";
+                                    }
                                   }
                                   else{?>
                                      <a href="javascript:void(0)" class="text-center harvest" id="<?php echo $a['t_id'] ?>" title="Post Harvest Accumlation">
