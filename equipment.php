@@ -16,7 +16,7 @@ include('header.php');
     </div>
     <div class="col text-right col-md-2">
        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#equipment_add">
-               <i class="fas fa-plus-circle mr-1"></i> Add Equipment Details
+               <i class="fas fa-plus-circle mr-1"></i> Add Equipment
         </button>
     </div>
 </div>
@@ -97,7 +97,7 @@ include('header.php');
                 <tbody>
                   <?php
                       require('controller/db.php');
-                      $equipment = "SELECT *,e.id as e_id FROM equipment e LEFT JOIN equipment_maintenance em ON em.equipment_id = e.id ORDER BY e.id DESC";
+                      $equipment = "SELECT * FROM equipment ORDER BY id DESC";
                       $qry = $conn->query($equipment) or trigger_error(mysqli_error($conn)." ".$equipment);
                       $code = "EQPMT";
                       while($a = mysqli_fetch_assoc($qry)){?>
@@ -126,35 +126,53 @@ include('header.php');
                           <td class="text-center"><?php echo $a['capacity']." ".$a['unit'] ?> </td>
 
                           <td class="text-center">
-
                             <?php 
                             date_default_timezone_set("Asia/Manila");
-                                    if($a['date_sched'] == date("Y-m-d")){
-                                      $id = $a['e_id'];
+                              $eqp_id = $a['id'];
+
+                                $date_sched = "SELECT date_sched from equipment_maintenance WHERE equipment_id = '$eqp_id'";
+                                $qrqr = $conn->query($date_sched) or trigger_error(mysqli_error($conn)." ".$date_sched);
+                                $z = mysqli_fetch_assoc($qrqr);
+                                    if($z['date_sched'] == date("Y-m-d")){
+                                      $id = $a['id'];
                                         $update = "UPDATE equipment SET status = 3, availability = 1 WHERE id ='$id'";
                                         $qry_1 = $conn->query($update) or trigger_error(mysqli_error($conn)." ".$update);
                                     }
                                     if($a['status'] == 2){
-                                        echo "<span class='badge badge-warning p-2'>Non Operational</span>"; 
+                                        echo "<span class='badge badge-danger p-2'>Non Operational</span>"; 
                                     } 
                                     else if($a['status'] == 1){
-                                      $stats = "<a href='javascript:void(0)' id='".$a['id']."'>";
-                                          $stats .="<span class='badge badge-success p-2'>Operational</span>"; 
-                                          $stats .= "</a>";
+                                        $stats = "<a href='javascript:void(0)' id='".$a['id']."'>";
+                                        $stats .="<span class='badge badge-success p-2'>Operational</span>"; 
+                                        $stats .= "</a>";
                                         echo $stats;
                                     }
-                                    else if($a['status'] == 3){
-                                        echo "<span class='badge badge-warning'>Under Maintenance</span>";
-                                    }
+                                    else if($a['status'] == 3){?>
+                                      <a href="javascript:void(0)" data-toggle="modal" data-target="#m<?php echo $a['id'] ?>" title="Set Equipment to Operational">
+                                        <span class='badge badge-warning'>Under Maintenance</span>
+                                      </a>
+                              <?php    }
                             ?> 
                           </td>
+                        <?php include('operational_modal.php'); ?>
                           <td class="text-center">                  
-                              <a href="javascript:void(0)" id="<?php echo $a['e_id'] ?>" class="edit_equipment mr-2" Title = "Edit">
+                              <a href="javascript:void(0)" id="<?php echo $a['id'] ?>" class="edit_equipment mr-2" Title = "Edit">
                                <i class="fas fa-edit ml-2"></i>
                              </a>
-                             <a href="javascript:void(0)" id="<?php echo $a['e_id'] ?>" class="maintenance" Title = "Set Maintenance">
+                             <a href="javascript:void(0)" title="View Maintenance Schedule" data-toggle="modal" data-target="#c<?php echo $a['id'] ?>">
+                               <i class="fas fa-info mr-2 text-success"></i>
+                             </a>
+                             <?php
+                                if($a['status'] == 3){
+                                    echo "";
+                                }
+                                else{?>
+                             <a href="javascript:void(0)" id="<?php echo $a['id'] ?>" class="maintenance" Title = "Set Maintenance">
                               <i class="fas fa-exclamation-triangle text-warning"></i>
                              </a>
+                              <?php }
+                             ?>
+
                           </td>
                         </tr>
                   <?php } ?>

@@ -22,7 +22,17 @@
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-
+  <style type="text/css">
+    .fc-event .fc-bg {
+      z-index: 1;
+      background: #2e86de;
+      opacity: .70;
+    }
+    .fc-title {
+      white-space: normal;
+    }
+    
+  </style>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

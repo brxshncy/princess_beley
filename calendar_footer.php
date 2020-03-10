@@ -22,16 +22,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 <script>
       $(document).ready(function(){
+        var d = new Date();
+        var CurDate = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); 
           var calendar = $('#calendar').fullCalendar({
             editable:true,
             plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
-            nextDayThreshold: '09:00:00',
             header:{
               left:'prev,next today',
               center:'title',
-              right:'month,agendaWeek,agendaDay'
+              right:'month,basicWeek,basicDay'
             },
-            events:'controller/calendar_transactions.php'
+            navLinks: true, 
+            editable: false,
+            columnFormat: 'dddd',
+            defaultDate: CurDate,
+            events:{
+              url:'controller/calendar_transactions.php',
+              error:function(){
+                alert('error');
+              }
+            },
+            eventRender:function(event,element){
+                console.log(event);
+                element.find(".fc-title").append("<b>Equipment Name :</b><u>"+event.equipment_name+"</u><br><b>Benefeciaries: </b><u>"+event.benefeciaries+"</u><br> <b>Reason:</b><u>"+event.reason+"</u><br><b>Address</b>:<u>"+event.address+"<br><b>District Coordinator :</b><u>"+event.dc+"</u>")
+            }
           });
           
           var calendar1 = $('#calendar1').fullCalendar({
@@ -43,7 +57,19 @@
               center:'title',
               right:'month,agendaWeek,agendaDay'
             },
-            events:'controller/calendar_maintenance.php'
+            navLinks: true, 
+            editable: false,
+            columnFormat: 'dddd',
+            defaultDate: CurDate,
+            events:{
+                url:'controller/calendar_maintenance.php',
+                error:function(){
+                  alert('error');
+                }
+            },
+            eventRender:function(event,element){
+              element.find(".fc-title").append("<b>Equipment: </b>"+event.equipment_name);
+            }
           });
       })
   </script>

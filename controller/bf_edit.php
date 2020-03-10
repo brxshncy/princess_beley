@@ -4,11 +4,13 @@ require('db.php');
 if(isset($_POST['id'])){
 	$id = $_POST['id'];
 	$gc = $_POST['gc'];
+	$contact = $_POST['contact'];
 	$area = $_POST['area'];
 
 
 	$uy = "UPDATE benefeciaries SET 
 	benefeciaries = '$gc',
+	contact = '$contact',
 	specific_area = '$area'
 	WHERE id = '$id'
 	";

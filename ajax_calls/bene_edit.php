@@ -16,6 +16,13 @@ if(isset($_POST['id'])){
 
 		</div>
 	</div>
+		<div class="col col-md-6">
+		<div class="form-group">
+			<label>Contact</label>
+			<input type="text" class="form-control" value="<?php echo $a['benefeciaries'] ?>" name="gc">
+
+		</div>
+	</div>
 </div>
 <div class="row">
 	<div class="col">

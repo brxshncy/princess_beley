@@ -4,7 +4,7 @@ $title = "Transactions";
 $main_sidebar = "Calendar";
 $sidebar = "Transactions";
 $header_content = "Transactions";
-$header = "Calendar";
+$header = "Equipment Reservations";
 include('calendar_header.php');
  ?>
 <?php include('staff_sidebar.php'); ?>  

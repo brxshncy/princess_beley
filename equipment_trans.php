@@ -113,13 +113,10 @@ include('content_header.php');
                                       <i class="fas fa-envelope text-success"></i>
                                   </a>
                                <?php } else if($row['availability'] == 1 || $row['status'] == 2 || $row['status'] == 3) { ?>
-                                  <a href="javascript:void(0)" title="Book Request">
+                                 <a href="javascript:void(0)" id="<?php echo $row['id'] ?>" class="req" title="Book Request">
                                       <i class="fas fa-book text-info"></i>
                                   </a>
                                <?php } ?>
-                                
-                            
-                             
                           </td>
                         </tr>
                      <?php }
